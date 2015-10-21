@@ -33,14 +33,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script>
   describe('jreut-logo tests', function() {
-    var element;
+    var element, text;
 
     before(function() {
       element = fixture('basic');
     });
 
-    it('', function() {
-
+    it('changes color', function() {
+      text = element.querySelector('text.primary');
+      element.primary = 'rgb(240, 11, 164)';
+      expect(text.style.fill).to.eq('rgb(240, 11, 164)');
     });
 
   });
