@@ -1,10 +1,8 @@
 svg.logo {
-  display: block;
   font-family: 'Source Code Pro';
   font-weight: bold;
 
-  margin: auto;
-  width: 50%;
+  flex-basis: 50%;
 }
 
 svg.logo text.primary { fill: teal; }

@@ -1,49 +1,36 @@
 body {
   background-color: whitesmoke;
-  font-family: 'Source Code Pro', 'Arial', sans-serif; }
-  body a {
-    text-decoration: none; }
-    body a:link {
-      color: teal; }
-    body a:active {
-      color: firebrick; }
-    body a:visited {
-      color: darkslategrey; }
-    body a:hover {
-      color: darksalmon; }
-  body nav {
-    text-align: center; }
-    body nav .active {
-      font-weight: bolder; }
-    body nav > *:not(:last-child):after {
-      content: '\2014'; }
-  body #content {
-    padding: 2ex; }
-    @media screen and (max-width: 30em) {
-      body #content {
-        padding: 0;
-        font-size: 0.8em; } }
-    @media screen and (min-width: 75em) {
-      body #content {
-        padding: 10ex;
-        font-size: 1.5em; } }
-  body #footer {
-    text-align: right;
-    font-size: 0.5em; }
-  body #navbar {
-    padding: 1ex 1em;
-    text-align: center; }
-  body .banner {
-    width: 50%;
-    padding: 0 1em;
-    border: 1px solid lightblue;
-    margin: 1ex 0;
-    margin-left: auto;
-    margin-right: auto; }
-    @media screen and (max-width: 30em) {
-      body .banner {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0; } }
+  font-family: 'Source Code Pro', 'Arial', sans-serif;
 
-/*# sourceMappingURL=app.css.map */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+a { text-decoration: none; }
+a:link { color: teal; }
+a:active { color: firebrick; }
+a:visited { color: darkslategrey; }
+a:hover { color: darksalmon; }
+nav { text-align: center; }
+nav .active { font-weight: bolder; }
+nav > *:not(:last-child):after { content: '\2014'; }
+main {
+  flex: 1;
+  padding: 2ex;
+  display: flex;
+  justify-content: center;
+}
+footer { padding-bottom: 3ex; }
+
+@media screen and (max-width: 30em) {
+  body #content {
+    padding: 0;
+    font-size: 0.8em;
+  }
+}
+@media screen and (min-width: 75em) {
+  body #content {
+    padding: 10ex;
+    font-size: 1.5em;
+  }
+}
