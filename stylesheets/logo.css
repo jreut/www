@@ -1,0 +1,22 @@
+#logo {
+  font-size: 16em;
+  font-weight: bold;
+  margin: 10% auto;
+  position: relative;
+  border: .125em solid teal;
+  width: 1.2em;
+  height: 1.2em; }
+  @media screen and (min-width: 75em) {
+    #logo {
+      margin: 0 auto; } }
+  #logo .container {
+    position: absolute;
+    bottom: 4%;
+    left: 14%; }
+  #logo .j {
+    color: teal;
+    letter-spacing: -.291em; }
+  #logo .r {
+    color: darksalmon; }
+
+/*# sourceMappingURL=logo.css.map */
