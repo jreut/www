@@ -7,4 +7,5 @@ aws --profile personal s3 sync \
   --delete \
   --exclude '.*' \
   --exclude '.*/**' \
+  --acl 'public-read' \
 "$dist_dir" s3://"$bucket"
