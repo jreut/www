@@ -1,0 +1,47 @@
+{
+  "name": "jreut.com",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "watch": {
+    "serve": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": [
+        "css",
+        "html",
+        "json",
+        "mustache"
+      ]
+    }
+  },
+  "scripts": {
+    "watch": "npm-watch",
+    "clean": "rm -rf dist",
+    "style": "cat src/stylesheets/* | myth --compress --verbose > dist/compiled.css",
+    "document": "mustache src/data.json src/index.mustache > dist/index.html",
+    "assets": "cp -r {src,dist}/assets",
+    "private": "cp -r {src,dist}/private",
+    "favicon": "cp src/favicon/* dist/",
+    "preserve": "npm run dist",
+    "serve": "PORT=3000 npm start",
+    "predist": "npm run clean && mkdir dist",
+    "dist": "npm run style && npm run document && npm run assets && npm run favicon && npm run private",
+    "predeploy": "npm run dist",
+    "deploy": "bin/deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jreut/www.git"
+  },
+  "author": "Jordan Ryan Reuter <me@jreut.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "express": "^4.13.4",
+    "mustache": "^2.2.1",
+    "myth": "^1.5.0",
+    "npm-watch": "^0.1.1"
+  }
+}

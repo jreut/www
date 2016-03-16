@@ -1,6 +1,0 @@
-/* SITE */
-Jordan Ryan Reuter <me@jreut.com>
-
-https://keybase.io/jreut
-
-source: https://github.com/jreut/www.git
