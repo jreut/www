@@ -1,4 +1,5 @@
 node_modules/
 src/private/
+src/journal/
 dist/
 google*.html

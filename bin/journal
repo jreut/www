@@ -1,0 +1,17 @@
+#!/bin/sh
+
+src="$JOURNAL_PATH"
+dest=./src/journal
+
+if [ -z "$src" ]; then
+  echo "I require JOURNAL_PATH to be set"
+  exit 1
+fi
+
+rm -r "$dest"
+mkdir "$dest"
+
+for markdown in "$src"/*.md; do
+  base=$(basename "$markdown" md)
+  pandoc -t html -s "$markdown" > "$dest/${base}html"
+done
