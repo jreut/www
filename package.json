@@ -44,6 +44,7 @@
     "express": "^4.13.4",
     "mustache": "^2.2.1",
     "myth": "jreut/myth#3e493ed385",
-    "npm-watch": "^0.1.1"
+    "npm-watch": "^0.1.1",
+    "rimraf": "^2.5.4"
   }
 }

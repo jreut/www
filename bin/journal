@@ -1,19 +1,61 @@
-#!/bin/sh
+#!/usr/bin/env node
 
-src="$JOURNAL_PATH"
-dest=./src/journal
+var fs = require('fs');
+var path = require('path');
+var spawn = require('child_process').spawn;
+var rm = require('rimraf');
 
-if [ -z "$src" ]; then
-  echo "I require JOURNAL_PATH to be set"
-  exit 1
-else
-  echo "Using JOURNAL_PATH=$JOURNAL_PATH"
-fi
+var src = process.env.JOURNAL_PATH;
+var dest = path.join('.', 'src', 'journal');
 
-rm -r "$dest"
-mkdir "$dest"
+if (src === '') {
+  console.log('I require JOURNAL_PATH to be set');
+  process.exit(16);
+}
 
-for markdown in "$src"/*.md; do
-  base=$(basename "$markdown" md)
-  pandoc --to html --smart --standalone "$markdown" > "$dest/${base}html"
-done
+console.log('Using JOURNAL_PATH=%s', src);
+
+var cleanDir = new Promise(function(resolve, reject) {
+  rm(dest, function(err) {
+    if (err) { reject(err); }
+    fs.mkdir(dest, function(err) {
+      if (err) { reject(err); }
+      resolve();
+    });
+  });
+});
+
+var filterFiles = function(sourceDir) {
+  return function() {
+    return new Promise(function(resolve, reject) {
+      fs.readdir(sourceDir, function(err, files) {
+        if (err) { reject(err); }
+        resolve(files
+            .map(function(e) { return e.match(/^(.+)\.m(ark)?d(own)?$/); })
+            .filter(function(e) { return e; }));
+      });
+    });
+  };
+};
+
+var writeFiles = function(fileMatches) {
+  fileMatches.forEach(function(match) {
+    var infile = path.join(src, match[0]);
+    var outpath = path.join(dest, match[1].concat('.html'));
+    fs.open(outpath, 'wx', function(err, fd) {
+      if (err) { throw err; }
+      console.log('Writing %s -> %s', infile, outpath);
+      spawn('pandoc',
+          ['--to', 'html', '--smart', '--standalone', infile],
+          { stdio: [null, fd, null] });
+      fs.close(fd);
+    });
+  });
+};
+
+var bail = function(err) {
+  console.error(err);
+  process.exit(2);
+};
+
+cleanDir.then(filterFiles(src)).then(writeFiles).catch(bail);
