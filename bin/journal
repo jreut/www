@@ -6,6 +6,8 @@ dest=./src/journal
 if [ -z "$src" ]; then
   echo "I require JOURNAL_PATH to be set"
   exit 1
+else
+  echo "Using JOURNAL_PATH=$JOURNAL_PATH"
 fi
 
 rm -r "$dest"
@@ -13,5 +15,5 @@ mkdir "$dest"
 
 for markdown in "$src"/*.md; do
   base=$(basename "$markdown" md)
-  pandoc -t html -s "$markdown" > "$dest/${base}html"
+  pandoc --to html --smart --standalone "$markdown" > "$dest/${base}html"
 done
