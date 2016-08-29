@@ -49,6 +49,23 @@ const filterFiles = (sourceDir) => {
   };
 };
 
+const writeTableOfContents = (files) => {
+  let makeLink = (name, href) => util.format('<a href="/journal/%s">%s</a>', href, name);
+  let links = files.map((file) => makeLink(file.basename, file.id));
+  log(links.join('\n'));
+  let html = `
+  <!doctype html>
+  <html>
+  <head>
+    <title>Table of Contents</title>
+  </head>
+  <body>
+    ${links.join('\n')}
+  </body>
+  </html>`;
+  fs.writeFileSync(path.join(dest, 'index.html'), html);
+};
+
 const writeFiles = (files) => {
   files.forEach((file) => {
     let infile = path.join(src, file.all);
@@ -77,4 +94,7 @@ const bail = (err) => {
   process.exit(2);
 };
 
-cleanDir.then(filterFiles(src)).then(writeFiles).catch(bail);
+cleanDir.then(filterFiles(src)).then((files) => {
+  writeTableOfContents(files);
+  writeFiles(files);
+}).catch(bail);
