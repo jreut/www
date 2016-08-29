@@ -4,17 +4,20 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
+var util = require('util');
+var log = util.debuglog('journal');
+
 var rm = require('rimraf');
 
 var src = process.env.JOURNAL_PATH;
 var dest = path.join('.', 'src', 'journal');
 
 if (src === '') {
-  console.log('I require JOURNAL_PATH to be set');
+  log('I require JOURNAL_PATH to be set');
   process.exit(16);
 }
 
-console.log('Using JOURNAL_PATH=%s', src);
+log('Using JOURNAL_PATH=%s', src);
 
 var cleanDir = new Promise(function(resolve, reject) {
   rm(dest, function(err) {
@@ -45,25 +48,25 @@ var writeFiles = function(fileMatches) {
     var outpath = path.join(dest, match[1].concat('.html'));
     fs.open(outpath, 'wx', function(err, fd) {
       if (err) { throw err; }
-      console.log('Writing %s -> %s', infile, outpath);
+      log('Writing %s -> %s (%s)', infile, outpath, file.id);
       spawn('pandoc',
-          [
-            '--to', 'html5',
-            '--smart',
-            '--standalone',
-            '--section-divs',
-            // '--css=/compiled.css',
-            '--title-prefix=jreut',
-            infile
-          ],
-          { stdio: [null, fd, null] });
+        [
+          '--to', 'html5',
+          '--smart',
+          '--standalone',
+          '--section-divs',
+          // '--css=/compiled.css',
+          '--title-prefix=jreut',
+          infile
+        ],
+        { stdio: [null, fd, null] });
       fs.close(fd);
     });
   });
 };
 
 var bail = function(err) {
-  console.error(err);
+  log(err);
   process.exit(2);
 };
 
