@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-# vim:ft=javascript
+// vim:ft=javascript
 
 var fs = require('fs');
 var path = require('path');
@@ -47,7 +47,15 @@ var writeFiles = function(fileMatches) {
       if (err) { throw err; }
       console.log('Writing %s -> %s', infile, outpath);
       spawn('pandoc',
-          ['--to', 'html', '--smart', '--standalone', infile],
+          [
+            '--to', 'html5',
+            '--smart',
+            '--standalone',
+            '--section-divs',
+            // '--css=/compiled.css',
+            '--title-prefix=jreut',
+            infile
+          ],
           { stdio: [null, fd, null] });
       fs.close(fd);
     });
