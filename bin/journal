@@ -50,7 +50,7 @@ const filterFiles = (sourceDir) => {
 };
 
 const writeTableOfContents = (files) => {
-  let makeLink = (name, href) => util.format('<a href="/journal/%s">%s</a>', href, name);
+  let makeLink = (name, href) => util.format('<a href="/journal/%s.html">%s</a>', href, name);
   let links = files.map((file) => makeLink(file.basename, file.id));
   log(links.join('\n'));
   let html = `
@@ -69,10 +69,10 @@ const writeTableOfContents = (files) => {
 const writeFiles = (files) => {
   files.forEach((file) => {
     let infile = path.join(src, file.all);
-    let outpath = path.join(dest, file.basename.concat('.html'));
+    let outpath = path.join(dest, file.id.concat('.html'));
     fs.open(outpath, 'wx', (err, fd) => {
       if (err) { throw err; }
-      log('Writing %s -> %s (%s)', infile, outpath, file.id);
+      log('Writing %s -> %s', infile, outpath);
       spawn('pandoc',
         [
           '--to', 'html5',
