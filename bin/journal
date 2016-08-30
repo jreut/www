@@ -79,6 +79,7 @@ const writeFiles = (files) => {
           '--smart',
           '--standalone',
           '--section-divs',
+          '--html-q-tags',
           // '--css=/compiled.css',
           '--title-prefix=jreut',
           infile
