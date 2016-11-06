@@ -30,11 +30,43 @@
   </head>
   <body>
     <main id='content'>
-      <svg class="logo" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 347 347">
+      <svg class="logo" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 -55 347 447">
         <rect class="primary" fill="none" x="16" y="16" stroke-width="32" stroke-miterlimit="10" width="315" height="315"/>
         <g>
           <text transform="translate(62 243)" class="primary" font-size="256px">j</text>
           <text transform="translate(141 243)" class="secondary" font-size="256px">r</text>
+        </g>
+        <g id="party-hat">
+          <use xlink:href="#hat"
+            fill="teal"
+            stroke="darksalmon"
+            stroke-width="0.5ex"
+          />
+          <g clip-path="url(#hat-mask)">
+            <use xlink:href="#stripe" transform="translate(0 80)"/>
+            <use xlink:href="#stripe" transform="translate(0 150)"/>
+            <use xlink:href="#stripe" transform="translate(0 220)"/>
+            <use xlink:href="#stripe" transform="translate(0 290)"/>
+          </g>
+          <circle fill="darksalmon" cx="30" cy="-33" r="16"/>
+          <defs>
+            <polygon id="hat"
+              points="50,0 0,100 100,100"
+              transform="rotate(-40 25,50) scale(1.6)"
+            />
+            <clipPath id="hat-mask">
+              <use xlink:href="#hat"/>
+            </clipPath>
+            <line id="stripe"
+              x1="0"
+              y1="0"
+              x2="400"
+              y2="0"
+              stroke="darksalmon"
+              stroke-width="20px"
+              transform="rotate(-52)"
+            />
+          </defs>
         </g>
       </svg>
     </main>
