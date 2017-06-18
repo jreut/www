@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$WWW_ENV" ]
+then
+  WWW_ENV=development
+fi
+
+stout deploy --env "$WWW_ENV"

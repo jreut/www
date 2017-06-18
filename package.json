@@ -1,22 +1,7 @@
 {
   "name": "jreut.com",
-  "version": "1.0.0",
   "description": "My personal website",
-  "watch": {
-    "serve": {
-      "patterns": [
-        "src"
-      ],
-      "extensions": [
-        "css",
-        "html",
-        "json",
-        "mustache"
-      ]
-    }
-  },
   "scripts": {
-    "watch": "npm-watch",
     "clean": "rm -rf dist",
     "style": "cat src/stylesheets/* | myth --compress --verbose > dist/compiled.css",
     "document": "mustache src/data.json src/index.mustache > dist/index.html",
@@ -40,12 +25,9 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "eslint": "^3.4.0",
+    "eslint": "^4.0.0",
     "express": "^4.13.4",
     "mustache": "^2.2.1",
-    "myth": "jreut/myth#3e493ed385",
-    "npm-watch": "^0.1.1",
-    "rimraf": "^2.5.4",
-    "uuid": "^2.0.2"
+    "myth": "jreut/myth#3e493ed385"
   }
 }
