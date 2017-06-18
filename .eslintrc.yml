@@ -5,6 +5,7 @@ rules:
   quotes:
     - 2
     - single
+    - avoidEscape: true
   linebreak-style:
     - 2
     - unix

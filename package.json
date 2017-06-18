@@ -5,7 +5,7 @@
     "clean": "rm -rf dist",
     "style": "cat src/stylesheets/* | myth --compress --verbose > dist/compiled.css",
     "document": "mustache src/data.json src/index.mustache > dist/index.html",
-    "assets": "for dir in private graphics; do test -d src/$dir && cp -r {src,dist}/$dir; done",
+    "assets": "for dir in private graphics programs; do test -d src/$dir && cp -r {src,dist}/$dir; done",
     "favicon": "cp src/favicon/* dist/",
     "preserve": "npm run dist",
     "serve": "PORT=3000 npm start",
