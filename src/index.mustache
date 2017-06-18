@@ -53,7 +53,6 @@
           var url = new URL(link.href);
           var svg = link.import.querySelector('svg');
           document.querySelectorAll("img[src='" + url.pathname + "']").forEach(function(img) {
-            console.log(url.pathname, img, svg)
             img.replaceWith(svg);
           });
         });
